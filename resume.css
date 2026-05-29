@@ -1,0 +1,387 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    color: #333;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.resume-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #fafafa;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0 0 10px;
+    color: #000;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
+    margin: 20px 0 10px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin: 15px 0 5px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+header .contact-info {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    color: #222;
+    font-size: 1rem;
+    border-radius: 50%;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.contact-link:hover {
+    text-decoration: none;
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.project-item ul, .education-item p {
+    margin: 0;
+}
+
+.project-item ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.project-item ul li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.education-item {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.education-item h3, .education-item p {
+    margin: 0;
+}
+
+.education-item p {
+    margin-top: 5px;
+    color: #666;
+}
+
+.skills p {
+    margin: 5px 0;
+}
+
+.project-item {
+    margin-bottom: 20px;
+}
+
+.project-item h3 {
+    margin-bottom: 8px;
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN - Mobile & Tablet Styles */
+/* ============================================ */
+
+/* Tablet Screens (768px - 1024px) */
+@media (max-width: 1024px) {
+    .resume-container {
+        max-width: 90%;
+        margin: 30px auto;
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    .project-item ul li {
+        font-size: 0.95rem;
+    }
+}
+
+/* Mobile Screens (576px - 767px) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .resume-container {
+        max-width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+        font-size: 1.6rem;
+        margin: 0 0 8px;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        padding-bottom: 4px;
+        margin: 16px 0 8px;
+        border-bottom: 2px solid #000;
+    }
+
+    h3 {
+        font-size: 1rem;
+        margin: 12px 0 4px;
+    }
+
+    header .contact-info {
+        margin-bottom: 16px;
+        gap: 12px;
+    }
+
+    .contact-link {
+        width: 26px;
+        height: 26px;
+        font-size: 0.9rem;
+    }
+
+    .project-item {
+        margin-bottom: 16px;
+    }
+
+    .project-item h3 {
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+    }
+
+    .project-item ul {
+        padding-left: 18px;
+        margin-top: 8px;
+    }
+
+    .project-item ul li {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+        line-height: 1.5;
+    }
+
+    .education-item {
+        margin-bottom: 12px;
+    }
+
+    .education-item h3 {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+    }
+
+    .education-item p {
+        font-size: 0.85rem;
+        margin-top: 3px;
+    }
+
+    .skills {
+        margin-bottom: 12px;
+    }
+
+    .skills h2 {
+        margin: 14px 0 6px;
+    }
+
+    .skills p {
+        font-size: 0.85rem;
+        margin: 4px 0;
+    }
+}
+
+/* Small Mobile Screens (up to 576px) */
+@media (max-width: 576px) {
+    body {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .resume-container {
+        max-width: 100%;
+        margin: 15px 0;
+        padding: 15px;
+        border: none;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        box-shadow: none;
+        background-color: #fff;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+        margin: 0 0 6px;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        padding-bottom: 3px;
+        margin: 14px 0 7px;
+    }
+
+    h3 {
+        font-size: 0.95rem;
+        margin: 10px 0 3px;
+    }
+
+    header {
+        margin-bottom: 10px;
+    }
+
+    header .contact-info {
+        margin-bottom: 12px;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .contact-link {
+        width: 24px;
+        height: 24px;
+        font-size: 0.85rem;
+    }
+
+    .project-item {
+        margin-bottom: 14px;
+    }
+
+    .project-item h3 {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+
+    .project-item ul {
+        padding-left: 16px;
+        margin-top: 6px;
+    }
+
+    .project-item ul li {
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+        line-height: 1.4;
+    }
+
+    .education-item {
+        margin-bottom: 10px;
+    }
+
+    .education-item h3 {
+        font-size: 0.9rem;
+        margin-bottom: 3px;
+    }
+
+    .education-item p {
+        font-size: 0.8rem;
+        margin-top: 2px;
+    }
+
+    .skills {
+        margin-bottom: 10px;
+    }
+
+    .skills h2 {
+        margin: 12px 0 5px;
+    }
+
+    .skills p {
+        font-size: 0.8rem;
+        margin: 3px 0;
+    }
+
+    a {
+        word-break: break-word;
+    }
+}
+
+/* Extra Small Devices (up to 375px) */
+@media (max-width: 375px) {
+    body {
+        font-size: 12px;
+    }
+
+    .resume-container {
+        padding: 12px;
+        margin: 10px 0;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+        margin: 0 0 5px;
+    }
+
+    h2 {
+        font-size: 1rem;
+        margin: 12px 0 5px;
+        padding-bottom: 2px;
+    }
+
+    h3 {
+        font-size: 0.9rem;
+        margin: 8px 0 2px;
+    }
+
+    header .contact-info {
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    .contact-link {
+        width: 22px;
+        height: 22px;
+        font-size: 0.8rem;
+    }
+
+    .project-item ul li {
+        font-size: 0.75rem;
+        margin-bottom: 4px;
+    }
+
+    .education-item p {
+        font-size: 0.75rem;
+    }
+
+    .skills p {
+        font-size: 0.75rem;
+    }
+}

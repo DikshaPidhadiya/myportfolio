@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diksha Pidhadiya - Personal Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Diksha Pidhadiya</div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle Navigation Menu" aria-controls="navMenu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="navMenu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">My Skills</a></li>
+                <li><a href="#projects">Project</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#contact">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="hero-content">
+                <p>PORTFOLIO WEBSITE</p>
+                <h1>Hey! I am</h1>
+                <div class="typing-name">
+                    <span>Pidhadiya Diksha</span>
+                </div>
+                <p class="hero-tagline">
+                    <span class="tagline-main">B.Tech Computer Engineering student</span>
+                    <span class="tagline-sub">focused on Java, Python, and full-stack applications.</span>
+                </p>
+                <div class="hero-buttons">
+                    <a href="mailto:pidhadiyadiksha@gmail.com" class="btn">Email</a>
+                    <a href="https://www.linkedin.com/in/dikshapidhadiya/" target="_blank" class="btn">LinkedIn</a>
+                    <a href="https://github.com/dikshapidhadiya" target="_blank" class="btn">GitHub</a>
+                </div>
+                <!-- Front stats (inserted below hero buttons) -->
+                <div class="hero-stats">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">portfolio projects</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">certifications</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">database systems</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">computer engineering degree path</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-3d">
+                <!-- 3D model will be here -->
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="section-container">
+                <h2>My Skills</h2>
+                <p>Grouped by language, framework, libraries, databases, and tools.</p>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Languages</h3>
+                        <span>Java</span>
+                        <span>Python</span>
+                        <span>JavaScript</span>
+                        <span>C</span>
+                        <span>PowerShell</span>
+                        <span>PHP</span>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Frontend</h3>
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>Bootstrap</span>
+                        <span>Tailwind CSS</span>
+                        <span>React</span>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Backend & Frameworks</h3>
+                        <span>Django</span>
+                        <span>Flask</span>
+                        <span>Node.js</span>
+                        <span>npm</span>
+                        <span>REST API</span>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Libraries & Data Science</h3>
+                        <span>Numpy</span>
+                        <span>Pandas</span>
+                        <span>Matplotlib</span>
+                        <span>Plotly</span>
+                        <span>Seaborn</span>
+                        <span>Scipy</span>
+                        <span>Scikit-learn</span>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Databases</h3>
+                        <span>MySQL</span>
+                        <span>SQLite</span>
+                        <span>PostgreSQL</span>
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Tools</h3>
+                        <span>Git</span>
+                        <span>GitHub</span>
+                        <span>VS Code</span>
+                        <span>IntelliJ IDEA</span>
+                        <span>Jupyter Notebook</span>
+                        <span>Canva</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-container">
+                <h2>Projects</h2>
+                <p>Open-source and product-oriented work from resume experience.</p>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Stock Trading Application</h3>
+                        <a href="#" class="view-project-btn">View Project</a>
+                        <ul>
+                            <li>Built a Java desktop app with Swing/AWT for an interactive trading UI.</li>
+                            <li>Implemented authentication, real-time portfolio tracking, and transactions.</li>
+                            <li>Used Linked Lists and Circular Queues for efficient order execution.</li>
+                            <li>Integrated a relational SQL database with custom exception handling.</li>
+                        </ul>
+                    </div>
+                    <div class="project-card">
+                        <h3>EzyHeal - Smart Pharmacy App</h3>
+                        <a href="#" class="view-project-btn">View Project</a>
+                        <ul>
+                            <li>Developed a full-stack healthcare e-commerce app using Flask and SQLite.</li>
+                            <li>Implemented OTP email auth with SHA256 password hashing and SMTP.</li>
+                            <li>Built hospital appointment booking with slot availability and cancellation support.</li>
+                            <li>Designed REST APIs for auth, orders, users, and hospital appointments.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="section-container">
+                <h2>Education</h2>
+                <div class="education-item">
+                    <h3>L University</h3>
+                    <p>B.Tech in Computer Engineering, Ahmedabad, India</p>
+                    <p>June 2024 - Aug. 2028</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates">
+            <div class="section-container">
+                <h2>Certificates</h2>
+                <div class="certificates-grid">
+                    <a href="https://coursera.org/share/4873d8b4d42c24d3c78b4e3305f8bb51" target="_blank" class="certificate-card">
+                        <h3>Introduction to Java</h3>
+                    </a>
+                    <a href="https://coursera.org/share/547f631ba7ecc676df318064edfccf49" target="_blank" class="certificate-card">
+                        <h3>Inheritance and Data Structures in Java</h3>
+                    </a>
+                    <a href="https://coursera.org/share/9e8484423f490e4b2aaf3c396595bd4d" target="_blank" class="certificate-card">
+                        <h3>HTML, CSS, and Javascript for Web Developers</h3>
+                    </a>
+                    <a href="https://coursera.org/share/72788bb2836bd3209660d1dd5c9871fc" target="_blank" class="certificate-card">
+                        <h3>Building Chatbots with OpenAI and Streamlit</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-container">
+                <h2>Contact</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Let's build dependable software together</h3>
+                        <p>+91 98752 87957</p>
+                        <p>pidhadiyadiksha@gmail.com</p>
+                        <p><a href="https://www.linkedin.com/in/dikshapidhadiya/" target="_blank">LinkedIn</a></p>
+                        <p><a href="https://github.com/dikshapidhadiya" target="_blank">GitHub</a></p>
+                        <a href="resume.html" class="btn" target="_blank">Download Resume</a>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                            <input type="hidden" name="access_key" value="51ab48ee-a1d7-459b-827c-b750332c25bd">
+                            <input type="hidden" name="from_name" value="Diksha Portfolio Contact Form">
+                            <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off">
+
+                            <input type="text" name="name" placeholder="Your name" autocomplete="name" minlength="2" maxlength="60" required>
+                            <input type="email" name="email" placeholder="you@example.com" autocomplete="email" inputmode="email" required>
+                            <input type="text" name="subject" placeholder="Project discussion" minlength="4" maxlength="100" required>
+                            <textarea name="message" placeholder="Tell me what you would like to build" minlength="10" maxlength="1200" required></textarea>
+                            <button type="submit" class="btn" id="contactSubmitBtn">Send message</button>
+                            <p class="form-status" id="formStatus" aria-live="polite"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h4>Diksha Pidhadiya Creations</h4>
+                <p>Passionate about building reliable, modern, and functional digital experiences.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#certificates">Certificates</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-connect">
+                <h4>Connect</h4>
+                <a href="https://www.linkedin.com/in/dikshapidhadiya/" target="_blank" aria-label="LinkedIn" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/dikshapidhadiya" target="_blank" aria-label="GitHub" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:pidhadiyadiksha@gmail.com" aria-label="Email" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright 2026. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
