@@ -310,49 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* Move or restore the hero 3D element for mobile responsiveness
-       On small screens we want the animation to live on the "second page" (after #home)
-       so it doesn't overlap the hero content. On larger screens restore it into #home. */
-    const hero3dEl = document.querySelector('.hero-3d');
-    const skillsSection = document.getElementById('skills');
-    const homeSection = document.getElementById('home');
-
-    function moveHero3dForViewport() {
-        if (!hero3dEl || !homeSection || !skillsSection) return;
-        const mobileBreakpoint = 768;
-        if (window.innerWidth <= mobileBreakpoint) {
-            // move after the hero (so it appears as the next 'page' section)
-            if (skillsSection && hero3dEl.previousElementSibling !== skillsSection && hero3dEl.parentElement !== document.body) {
-                // place it right before the skills section
-                skillsSection.parentElement.insertBefore(hero3dEl, skillsSection);
-            }
-            // ensure it doesn't overlap: full-width, relative positioning
-            hero3dEl.style.position = 'relative';
-            hero3dEl.style.width = '100%';
-            hero3dEl.style.height = '320px';
-            hero3dEl.style.margin = '18px 0 0 0';
-        } else {
-            // restore into #home if it's been moved
-            if (homeSection && !homeSection.contains(hero3dEl)) {
-                homeSection.appendChild(hero3dEl);
-            }
-            // restore desktop-friendly sizing via CSS (remove inline overrides)
-            hero3dEl.style.position = '';
-            hero3dEl.style.width = '';
-            hero3dEl.style.height = '';
-            hero3dEl.style.margin = '';
-        }
-        // trigger a canvas resize after moving
-        resizeHeroCanvas();
-    }
-
-    // Debounced resize handler
-    let _moveTimeout = null;
-    window.addEventListener('resize', () => {
-        clearTimeout(_moveTimeout);
-        _moveTimeout = setTimeout(moveHero3dForViewport, 120);
-    });
-
-    // Run once on load
-    moveHero3dForViewport();
+    // Keep the 3D hero in place and let CSS control the mobile stacking order.
+    // This avoids DOM moves that can cause visibility issues on some deployed builds.
 });
