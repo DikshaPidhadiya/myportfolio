@@ -1,111 +1,141 @@
-const THREE = window.THREE;
-
-if (!THREE) {
-    throw new Error('Three.js failed to load.');
-}
+import * as THREE from 'three';
 
 // --- 3D Scene ---
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-
 const hero3d = document.querySelector('.hero-3d');
-if (hero3d) {
-    renderer.setSize(hero3d.clientWidth, hero3d.clientHeight);
+let renderer = null;
+let scene = null;
+let camera = null;
+let heroGroup = null;
+let core = null;
+let accentRing = null;
+let orbitPath = null;
+let particles = null;
+let animationFrameId = 0;
+let resizeObserver = null;
+
+function createHeroScene() {
+    if (!hero3d || hero3d.dataset.hero3dReady === 'true') {
+        return;
+    }
+
+    const width = hero3d.clientWidth;
+    const height = hero3d.clientHeight;
+
+    if (!width || !height) {
+        requestAnimationFrame(createHeroScene);
+        return;
+    }
+
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+    camera.position.z = 30;
+
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.setSize(width, height, false);
+    renderer.domElement.setAttribute('aria-hidden', 'true');
     hero3d.appendChild(renderer.domElement);
-}
 
-// Hero object
-const heroGroup = new THREE.Group();
+    heroGroup = new THREE.Group();
 
-const frameGeometry = new THREE.BoxGeometry(12, 12, 0.7);
-const frameEdges = new THREE.EdgesGeometry(frameGeometry);
-const frameLines = new THREE.LineSegments(
-    frameEdges,
-    new THREE.LineBasicMaterial({ color: 0x1f7aff, transparent: true, opacity: 0.95 })
-);
-frameLines.rotation.z = -0.14;
-frameLines.scale.set(1.05, 1.05, 1);
-heroGroup.add(frameLines);
-
-const accentRing = new THREE.Mesh(
-    new THREE.TorusGeometry(7.8, 0.32, 18, 120),
-    new THREE.MeshStandardMaterial({ color: 0x7b7dff, transparent: true, opacity: 0.22, metalness: 0.4, roughness: 0.15 })
-);
-accentRing.rotation.x = Math.PI / 2.7;
-accentRing.position.set(2.8, -1.6, -0.6);
-heroGroup.add(accentRing);
-
-const core = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(3.8, 1),
-    new THREE.MeshStandardMaterial({
-        color: 0x4f8cff,
-        metalness: 0.85,
-        roughness: 0.18,
-        wireframe: true
-    })
-);
-core.position.set(0.8, 1.4, 0.7);
-heroGroup.add(core);
-
-const orbitalMaterials = [0xff9f1c, 0x22c1ff, 0xcc33cc].map((color) => (
-    new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.2, roughness: 0.25 })
-));
-
-const orbiters = [
-    { x: -4.4, y: -1.5, z: 1.4, s: 1.05, material: orbitalMaterials[0] },
-    { x: 4.3, y: 2.2, z: 1.2, s: 1.05, material: orbitalMaterials[1] },
-    { x: -5.2, y: 2.8, z: 0.9, s: 1.15, material: orbitalMaterials[2] }
-].map((item) => {
-    const sphere = new THREE.Mesh(new THREE.SphereGeometry(item.s, 32, 32), item.material);
-    sphere.position.set(item.x, item.y, item.z);
-    heroGroup.add(sphere);
-    return sphere;
-});
-
-const orbitPath = new THREE.Mesh(
-    new THREE.TorusGeometry(5.9, 0.04, 12, 160),
-    new THREE.MeshBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.22 })
-);
-orbitPath.rotation.y = 0.5;
-orbitPath.rotation.z = -0.18;
-heroGroup.add(orbitPath);
-
-scene.add(heroGroup);
-
-const particles = new THREE.Group();
-const particleGeometry = new THREE.SphereGeometry(0.08, 10, 10);
-const particleMaterial = new THREE.MeshBasicMaterial({ color: 0xdbeafe, transparent: true, opacity: 0.55 });
-for (let index = 0; index < 28; index += 1) {
-    const particle = new THREE.Mesh(particleGeometry, particleMaterial);
-    particle.position.set(
-        (Math.random() - 0.5) * 14,
-        (Math.random() - 0.5) * 14,
-        (Math.random() - 0.5) * 6
+    const frameGeometry = new THREE.BoxGeometry(12, 12, 0.7);
+    const frameEdges = new THREE.EdgesGeometry(frameGeometry);
+    const frameLines = new THREE.LineSegments(
+        frameEdges,
+        new THREE.LineBasicMaterial({ color: 0x1f7aff, transparent: true, opacity: 0.95 })
     );
-    particles.add(particle);
+    frameLines.rotation.z = -0.14;
+    frameLines.scale.set(1.05, 1.05, 1);
+    heroGroup.add(frameLines);
+
+    accentRing = new THREE.Mesh(
+        new THREE.TorusGeometry(7.8, 0.32, 18, 120),
+        new THREE.MeshStandardMaterial({ color: 0x7b7dff, transparent: true, opacity: 0.22, metalness: 0.4, roughness: 0.15 })
+    );
+    accentRing.rotation.x = Math.PI / 2.7;
+    accentRing.position.set(2.8, -1.6, -0.6);
+    heroGroup.add(accentRing);
+
+    core = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(3.8, 1),
+        new THREE.MeshStandardMaterial({
+            color: 0x4f8cff,
+            metalness: 0.85,
+            roughness: 0.18,
+            wireframe: true
+        })
+    );
+    core.position.set(0.8, 1.4, 0.7);
+    heroGroup.add(core);
+
+    const orbitalMaterials = [0xff9f1c, 0x22c1ff, 0xcc33cc].map((color) => (
+        new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.2, roughness: 0.25 })
+    ));
+
+    [
+        { x: -4.4, y: -1.5, z: 1.4, s: 1.05, material: orbitalMaterials[0] },
+        { x: 4.3, y: 2.2, z: 1.2, s: 1.05, material: orbitalMaterials[1] },
+        { x: -5.2, y: 2.8, z: 0.9, s: 1.15, material: orbitalMaterials[2] }
+    ].forEach((item) => {
+        const sphere = new THREE.Mesh(new THREE.SphereGeometry(item.s, 32, 32), item.material);
+        sphere.position.set(item.x, item.y, item.z);
+        heroGroup.add(sphere);
+    });
+
+    orbitPath = new THREE.Mesh(
+        new THREE.TorusGeometry(5.9, 0.04, 12, 160),
+        new THREE.MeshBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.22 })
+    );
+    orbitPath.rotation.y = 0.5;
+    orbitPath.rotation.z = -0.18;
+    heroGroup.add(orbitPath);
+
+    scene.add(heroGroup);
+
+    particles = new THREE.Group();
+    const particleGeometry = new THREE.SphereGeometry(0.08, 10, 10);
+    const particleMaterial = new THREE.MeshBasicMaterial({ color: 0xdbeafe, transparent: true, opacity: 0.55 });
+    for (let index = 0; index < 28; index += 1) {
+        const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+        particle.position.set(
+            (Math.random() - 0.5) * 14,
+            (Math.random() - 0.5) * 14,
+            (Math.random() - 0.5) * 6
+        );
+        particles.add(particle);
+    }
+    scene.add(particles);
+
+    const pointLight = new THREE.PointLight(0xffffff, 1.8, 100);
+    pointLight.position.set(20, 20, 20);
+    const fillLight = new THREE.PointLight(0x7b61ff, 1.25, 100);
+    fillLight.position.set(-18, -8, 18);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.28);
+    scene.add(pointLight, fillLight, ambientLight);
+
+    hero3d.dataset.hero3dReady = 'true';
+
+    if ('ResizeObserver' in window) {
+        resizeObserver = new ResizeObserver(() => {
+            resizeHeroCanvas();
+        });
+        resizeObserver.observe(hero3d);
+    }
+
+    resizeHeroCanvas();
+    animate();
 }
-scene.add(particles);
-
-// Lights
-const pointLight = new THREE.PointLight(0xffffff, 1.8, 100);
-pointLight.position.set(20, 20, 20);
-const fillLight = new THREE.PointLight(0x7b61ff, 1.25, 100);
-fillLight.position.set(-18, -8, 18);
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.28);
-scene.add(pointLight, fillLight, ambientLight);
-
-camera.position.z = 30;
-
-scene.rotation.x = -0.12;
 
 // Global speed multiplier for hero animations (increase to speed up)
 const SPEED = 2.5;
 
 function animate() {
-    requestAnimationFrame(animate);
+    if (!renderer || !scene || !camera || !heroGroup || !core || !accentRing || !orbitPath || !particles) {
+        return;
+    }
+
+    animationFrameId = requestAnimationFrame(animate);
 
     heroGroup.rotation.y += 0.004 * SPEED;
     heroGroup.rotation.x = -0.08 + Math.sin(Date.now() * 0.001 * SPEED) * 0.03;
@@ -118,22 +148,26 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-animate();
-
 function resizeHeroCanvas() {
-    if (!hero3d) {
+    if (!hero3d || !renderer || !camera) {
         return;
     }
 
     const width = hero3d.clientWidth;
     const height = hero3d.clientHeight;
+
+    if (!width || !height) {
+        return;
+    }
+
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 }
 
 window.addEventListener('resize', resizeHeroCanvas);
-resizeHeroCanvas();
+window.addEventListener('load', createHeroScene, { once: true });
+requestAnimationFrame(createHeroScene);
 
 const typingName = document.querySelector('.typing-name');
 
@@ -311,5 +345,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Keep the 3D hero in place and let CSS control the mobile stacking order.
-    // This avoids DOM moves that can cause visibility issues on some deployed builds.
 });
